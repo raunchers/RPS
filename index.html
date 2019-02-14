@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        game();
+        //Makes choice for computer
+        function computerPlay(){
+            let choices = ['rock', 'paper', 'scissors'];
+            //let compChoice = Math.floor(Math.random() * 3);
+            return choices[Math.floor(Math.random() * 3)];
+        }
+        //Checks which 'player' won the round
+        function playRound(playerSelect, computerSelect){
+            //Check if player won
+            if((playerSelect.toLowerCase() == 'rock' && computerSelect.toLowerCase() == 'scissors')
+            || (playerSelect.toLowerCase() == 'paper' && computerSelect.toLowerCase() == 'rock')
+            || (playerSelect.toLowerCase() == 'scissors' && computerSelect.toLowerCase() == 'paper')){
+                return 1;
+            }
+            //Check if computer won
+            else if((computerSelect.toLowerCase() == 'rock' && playerSelect.toLowerCase() == 'scissors')
+             ||     (computerSelect.toLowerCase() == 'paper' && playerSelect.toLowerCase() == 'rock')
+             ||     (computerSelect.toLowerCase() == 'scissors' && playerSelect.toLowerCase() == 'paper')){
+                 return 2;
+            }
+            else{
+                return 3;
+            }
+        }
+        //Plays 5 rounds, announces winner
+        function game(){
+            //Players score
+            let playerScore = 0;
+            //Computers score
+            let computerScore = 0;
+            //Counter, play 5 rounds
+            let counter = 0;
+            while(counter < 5){
+                //1 == player won, 2 == computer won, 3 == tie
+                let userChoice = prompt('Make a choice, rock, paper, scissors.');
+                let compChoice = computerPlay();
+                if(playRound(userChoice, compChoice) == 1){
+                    console.log('Round ' + counter + ' player won.');
+                    playerScore++;
+                    counter++;
+                }else if(playRound(userChoice, compChoice) == 2){
+                    console.log('Round ' + counter + ' computer won.');
+                    computerScore++;
+                    counter++;
+                }else{
+                    console.log('Round ' + counter + ' was a tie.');
+                    counter++;
+                }
+            }
+            //Check who won
+            if(playerScore > computerScore){
+                console.log('Player score: ' + playerScore + ' Computer score: ' + computerScore);
+                console.log('Player won.');
+            }else if(playerScore < computerScore){
+                console.log('Player score: ' + playerScore + ' Computer score: ' + computerScore);
+                console.log('Computer won.');
+            }else{
+                console.log('Player score: ' + playerScore + ' Computer score: ' + computerScore);
+                console.log('Tie.');
+            }
+        }
+    </script>
+</body>
+</html>
